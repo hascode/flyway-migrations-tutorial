@@ -4,6 +4,7 @@
 	<groupId>com.hascode.tutorial</groupId>
 	<artifactId>flyway-migration-tutorial</artifactId>
 	<version>1.0.0</version>
+	<packaging>war</packaging>
 	<prerequisites>
 		<maven>3.0.4</maven>
 	</prerequisites>
@@ -11,6 +12,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<h2.version>1.3.170</h2.version>
+		<flyway.version>2.1.1</flyway.version>
 	</properties>
 
 	<build>
@@ -18,7 +20,7 @@
 			<plugin>
 				<groupId>com.googlecode.flyway</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
-				<version>2.1.1</version>
+				<version>${flyway.version}</version>
 				<configuration>
 					<url>jdbc:h2:file:target/test_db</url>
 					<user>sa</user>
@@ -39,6 +41,57 @@
 					<source>1.7</source>
 					<target>1.7</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.glassfish</groupId>
+				<artifactId>maven-embedded-glassfish-plugin</artifactId>
+				<version>3.1.2</version>
+				<configuration>
+					<goalPrefix>embedded-glassfish</goalPrefix>
+					<app>${basedir}/target/${project.artifactId}-${project.version}.war</app>
+					<autoDelete>true</autoDelete>
+					<port>8080</port>
+					<name>flyway-tutorial</name>
+					<configFile>src/test/resources/glassfish/domain.xml</configFile>
+				</configuration>
+				<executions>
+					<execution>
+						<id>start-glassfish</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>glassfish-deploy</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>glassfish-undeploy</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>undeploy</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop-glassfish</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -64,6 +117,23 @@
 			<artifactId>junit-dep</artifactId>
 			<version>4.11</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.main.extras</groupId>
+			<artifactId>glassfish-embedded-all</artifactId>
+			<version>3.1.2</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.flyway</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>${flyway.version}</version>
 		</dependency>
 	</dependencies>
 </project>
