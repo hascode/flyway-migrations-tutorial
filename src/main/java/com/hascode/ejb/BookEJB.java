@@ -5,16 +5,18 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceContext;
 
 import com.hascode.entity.Book;
 
 @Stateless
 public class BookEJB implements BookService {
-	@PersistenceUnit(unitName = "hascode-jta-unit")
+	@PersistenceContext(unitName = "hascode-jta-unit")
 	private EntityManager em;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.hascode.ejb.BookService#findAll()
 	 */
 	@Override

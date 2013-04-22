@@ -30,9 +30,10 @@ public class BookServlet extends HttpServlet {
 			return;
 		}
 
-		resp.getWriter().append(books.size() + " books");
+		resp.getWriter().append(
+				books.size() + " books:\n---------------------------------\n");
 		for (Book book : books) {
-			resp.getWriter().append(book.getTitle() + "\n");
+			resp.getWriter().append("- " + book.getTitle() + "\n");
 		}
 	}
 
