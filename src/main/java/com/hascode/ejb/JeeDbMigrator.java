@@ -29,7 +29,6 @@ public class JeeDbMigrator {
 		}
 
 		Flyway flyway = new Flyway();
-		flyway.setSchemas("default-db");
 		flyway.setInitOnMigrate(true);
 		flyway.setDataSource(dataSource);
 		for (MigrationInfo i : flyway.info().all()) {
