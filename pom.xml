@@ -57,7 +57,6 @@
 					<autoDelete>true</autoDelete>
 					<port>8080</port>
 					<name>flyway-tutorial</name>
-					<configFile>src/test/resources/glassfish/domain.xml</configFile>
 				</configuration>
 			</plugin>
 		</plugins>
