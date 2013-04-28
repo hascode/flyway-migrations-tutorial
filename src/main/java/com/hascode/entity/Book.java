@@ -1,21 +1,17 @@
 package com.hascode.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity(name = "Book")
+@Entity
 public class Book {
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "title", length = 200, nullable = false)
 	private String title;
 
-	@Column(name = "author", length = 200)
 	private String author;
 
 	public final Long getId() {

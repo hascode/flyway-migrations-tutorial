@@ -14,11 +14,6 @@ public class BookEJB implements BookService {
 	@PersistenceContext(unitName = "hascode-jta-unit")
 	private EntityManager em;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.hascode.ejb.BookService#findAll()
-	 */
 	@Override
 	public List<Book> findAll() {
 		List<Book> books = em.createQuery("SELECT b FROM Book b", Book.class)

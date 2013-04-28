@@ -36,5 +36,4 @@ public class BookServlet extends HttpServlet {
 			resp.getWriter().append("- " + book.getTitle() + "\n");
 		}
 	}
-
 }
