@@ -15,7 +15,7 @@ import com.googlecode.flyway.core.api.MigrationInfo;
 @Singleton
 @Startup
 public class JeeDbMigrator {
-	private final Logger log = Logger.getLogger(JeeDbMigrator.class.getName());
+	private final Logger log = Logger.getLogger(getClass().getName());
 
 	@Resource(name = "jdbc/__default")
 	private DataSource dataSource;

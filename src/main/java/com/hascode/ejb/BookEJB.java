@@ -19,7 +19,7 @@ public class BookEJB implements BookService {
 		List<Book> books = em.createQuery("SELECT b FROM Book b", Book.class)
 				.getResultList();
 		if (books == null)
-			books = new ArrayList<Book>();
+			books = new ArrayList<>();
 		return books;
 	}
 }
